@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
+import { Volume2, VolumeX } from "lucide-react";
 
 const cinematicEase = [0.22, 1, 0.36, 1] as const;
 
@@ -59,20 +60,24 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          <a
-            href="#contact"
-            className="px-5 py-2 border border-cinema-gold text-cinema-gold font-mono text-xs tracking-widest uppercase hover:bg-cinema-gold hover:text-cinema-black transition-all duration-300"
-          >
-            Hire Me
-          </a>
+          
+          <div className="flex items-center gap-6 ml-2 border-l border-cinema-surface/50 pl-8">
+            <a
+              href="#contact"
+              className="px-5 py-2 border border-cinema-gold text-cinema-gold font-mono text-xs tracking-widest uppercase hover:bg-cinema-gold hover:text-cinema-black transition-all duration-300"
+            >
+              Hire Me
+            </a>
+          </div>
         </nav>
 
-        {/* Mobile Hamburger */}
-        <button
-          className="md:hidden flex flex-col gap-1.5 p-1"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
+        {/* Mobile Hamburger & Sound */}
+        <div className="md:hidden flex items-center gap-6">
+          <button
+            className="flex flex-col gap-1.5 p-1"
+            onClick={() => { setMenuOpen(!menuOpen); }}
+            aria-label="Toggle menu"
+          >
           <span
             className={`block w-6 h-px bg-cinema-cream transition-transform duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
           />
@@ -82,7 +87,8 @@ export default function Navbar() {
           <span
             className={`block w-6 h-px bg-cinema-cream transition-transform duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
           />
-        </button>
+          </button>
+        </div>
       </motion.header>
 
       {/* Mobile Menu */}
@@ -102,7 +108,7 @@ export default function Navbar() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.08 }}
-                onClick={() => setMenuOpen(false)}
+                onClick={() => { setMenuOpen(false); }}
                 className="font-bebas text-6xl text-cinema-cream hover:text-cinema-gold transition-colors duration-300"
               >
                 {link.label}

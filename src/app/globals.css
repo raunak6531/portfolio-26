@@ -14,6 +14,8 @@
   --font-bebas: var(--font-bebas-neue), "Bebas Neue", sans-serif;
   --font-dm-sans: var(--font-dm-sans-var), "DM Sans", sans-serif;
   --font-mono: var(--font-ibm-mono), "IBM Plex Mono", monospace;
+  --font-courier: var(--font-courier-prime), "Courier Prime", monospace;
+  --font-handwriting: var(--font-reenie-beanie), "Reenie Beanie", cursive;
 }
 
 * {
@@ -40,31 +42,11 @@ a, button, [role="button"] {
   cursor: none;
 }
 
-/* Film grain overlay */
-.grain::before {
-  content: "";
-  position: fixed;
-  inset: -200%;
-  width: 400%;
-  height: 400%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-  opacity: 0.035;
-  pointer-events: none;
-  z-index: 9999;
-  animation: grain 0.5s steps(1) infinite;
-}
+/* Global grain overlay removed for performance */
 
-@keyframes grain {
-  0%, 100% { transform: translate(0, 0); }
-  10% { transform: translate(-5%, -10%); }
-  20% { transform: translate(-15%, 5%); }
-  30% { transform: translate(7%, -25%); }
-  40% { transform: translate(-5%, 25%); }
-  50% { transform: translate(-15%, 10%); }
-  60% { transform: translate(15%, 0%); }
-  70% { transform: translate(0%, 15%); }
-  80% { transform: translate(3%, 35%); }
-  90% { transform: translate(-10%, 10%); }
+@keyframes typewriter-blink {
+  0%, 45% { opacity: 1; }
+  46%, 100% { opacity: 0; }
 }
 
 /* Marquee */
@@ -143,6 +125,14 @@ a, button, [role="button"] {
   .perspective-\[1000px\] {
     perspective: 1000px;
   }
+  
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* Screenplay divider */
@@ -186,6 +176,18 @@ a, button, [role="button"] {
   border-radius: 2px;
   background: #080808;
   border: 1px solid #2a2a2a;
+}
+
+.typewriter-copy {
+  font-family: var(--font-courier-prime), monospace;
+  letter-spacing: 0.02em;
+  text-wrap: pretty;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  margin-left: -0.12em;
+  animation: typewriter-blink 0.9s steps(1) infinite;
 }
 
 

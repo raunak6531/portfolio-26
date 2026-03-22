@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -9,209 +9,319 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
-const favFilms = [
-  { title: "2001: A Space Odyssey", dir: "KUBRICK" },
-  { title: "Mulholland Drive", dir: "LYNCH" },
-  { title: "Parasite", dir: "BONG JOON-HO" },
-  { title: "The Godfather", dir: "COPPOLA" },
-  { title: "Stalker", dir: "TARKOVSKY" },
-  { title: "Eternal Sunshine", dir: "GONDRY" },
-];
+const DirectorNote = ({ children, className = "", viewBox="0 0 100 100" }: { children: React.ReactNode, className?: string, viewBox?: string }) => (
+  <svg 
+    className={`absolute pointer-events-none director-note overflow-visible z-30 ${className}`} 
+    viewBox={viewBox}
+    fill="none" 
+    stroke="#cc0000"
+    strokeWidth="3" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    style={{ filter: "drop-shadow(0px 1px 1px rgba(200,0,0,0.3))", mixBlendMode: 'multiply' }}
+  >
+    {children}
+  </svg>
+);
 
-function ScrubText({ children, className = "" }: { children: string; className?: string }) {
-  const ref = useRef<HTMLParagraphElement>(null);
 
-  useGSAP(() => {
-    if (!ref.current) return;
-    const words = ref.current.querySelectorAll(".word");
-    gsap.fromTo(
-      words,
-      { opacity: 0.08, filter: "blur(2px)", y: 4 },
-      {
-        opacity: 1,
-        filter: "blur(0px)",
-        y: 0,
-        stagger: 0.03,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: ref.current,
-          start: "top 88%",
-          end: "bottom 55%",
-          scrub: 1.2,
-        },
-      }
-    );
-  }, { scope: ref });
+const ExplosiveWord = ({ children }: { children: React.ReactNode }) => (
+  <span className="explosive-word inline-block font-black text-[#7a0000] relative">
+    {children}
+  </span>
+);
+
+const ScriptLine = ({ type, text, className = "" }: { type: 'scene' | 'action' | 'character' | 'dialogue' | 'parenthetical' | 'transition' | 'thought' | 'narrator', text: string | React.ReactNode, className?: string }) => {
+  const styles = {
+    scene: "font-bold uppercase tracking-widest text-[#111] mb-10 mt-24 w-full text-left border-b-[6px] border-[#111]/80 pb-4 text-[18px] md:text-[24px] lg:text-[28px] underline underline-offset-[12px] decoration-4",
+    action: "mb-10 text-[#111] leading-[1.9] max-w-5xl w-full text-justify font-bold text-[18px] md:text-[24px] lg:text-[28px]",
+    character: "uppercase tracking-widest text-[#111] mb-2 mt-16 w-full flex justify-center text-center font-bold text-[22px] md:text-[28px] lg:text-[32px] drop-shadow-sm",
+    parenthetical: "mb-4 w-full flex justify-center text-center text-[#333] italic font-bold text-[18px] md:text-[22px] lg:text-[24px]",
+    dialogue: "mb-12 w-full max-w-4xl mx-auto leading-[1.9] text-[#111] font-bold text-center flex flex-col items-center text-[20px] md:text-[26px] lg:text-[30px]",
+    thought: "mb-12 w-full max-w-4xl mx-auto leading-[1.9] text-[#333] italic font-bold text-center flex flex-col items-center text-[19px] md:text-[25px] lg:text-[29px]",
+    narrator: "mb-12 w-full max-w-4xl mx-auto leading-[1.9] text-black font-black tracking-widest text-center flex flex-col items-center text-[21px] md:text-[27px] lg:text-[31px]",
+    transition: "font-bold uppercase tracking-widest mt-28 mb-28 text-right pr-[5%] lg:pr-[10%] w-full text-[20px] md:text-[24px] lg:text-[28px]",
+  };
 
   return (
-    <p ref={ref} className={className}>
-      {children.split(" ").map((word, i) => (
-        <span key={i} className="word inline-block mr-[0.3em] will-change-transform">
-          {word}
-        </span>
-      ))}
-    </p>
+    <div 
+      className={`script-line opacity-100 relative ${styles[type]} ${className} font-courier`}
+    >
+      {text}
+    </div>
   );
-}
+};
 
 export default function About() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (containerRef.current) {
+        containerRef.current.style.setProperty("--mouse-x", `${e.clientX}px`);
+        containerRef.current.style.setProperty("--mouse-y", `${e.clientY}px`);
+      }
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   useGSAP(() => {
-    if (!sectionRef.current) return;
+    if (!containerRef.current) return;
 
-    gsap.utils.toArray<HTMLElement>(".script-el").forEach((el) => {
-      gsap.fromTo(
-        el,
-        { y: 36, opacity: 0, filter: "blur(4px)" },
+    const lines = gsap.utils.toArray<HTMLElement>('.script-line');
+    
+    // Typewriter wet ink condensing effect & Anamorphic Focus
+    lines.forEach((line) => {
+      // 1. Enter from bottom — blurred & slightly transparent, racks into sharp focus
+      gsap.fromTo(line, 
+        { 
+          opacity: 0.45, 
+          y: 30, 
+          scale: 0.98,
+          textShadow: "0 0 20px rgba(0,0,0,0.6)",
+          filter: "blur(6px)"
+        },
         {
-          y: 0,
           opacity: 1,
+          y: 0,
+          scale: 1,
+          textShadow: "0 0 1px rgba(10,10,10,0.8), 0 0 5px rgba(10,10,10,0.2)",
           filter: "blur(0px)",
-          duration: 1.1,
-          ease: "power3.out",
+          ease: "power2.out",
           scrollTrigger: {
-            trigger: el,
-            start: "top 91%",
-            toggleActions: "play none none reverse",
-          },
+            trigger: line,
+            start: "top 95%",
+            end: "top 60%",
+            scrub: 1,
+          }
+        }
+      );
+
+      // 2. Blur out towards the top — stays visible but defocused (depth-of-field)
+      gsap.to(line, {
+        opacity: 0.55,
+        filter: "blur(5px)",
+        scale: 0.97,
+        textShadow: "0 0 20px rgba(0,0,0,0.5)",
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: line,
+          start: "bottom 45%",
+          end: "bottom 10%",
+          scrub: 1,
+        }
+      });
+    });
+
+    // 3. Director Notes Draw SVG Animation
+    const notes = gsap.utils.toArray<SVGPathElement>('.director-note path');
+    notes.forEach((note) => {
+      const length = note.getTotalLength() || 1000;
+      gsap.set(note, { strokeDasharray: length, strokeDashoffset: length });
+      
+      gsap.to(note, {
+        strokeDashoffset: 0,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: note.closest('.script-line') || note,
+          start: "top 80%",
+          end: "top 55%",
+          scrub: 1,
+        }
+      });
+    });
+
+    // 4. Explosive Word Impact Animation
+    const explosiveWords = gsap.utils.toArray<HTMLElement>('.explosive-word');
+    explosiveWords.forEach((word) => {
+      gsap.fromTo(word,
+        { 
+          scale: 1.6, 
+          color: "#ff0000",
+          textShadow: "6px 0 15px rgba(255,0,0,0.9), -6px 0 15px rgba(0,255,255,0.9)",
+          filter: "blur(4px)"
+        },
+        {
+          scale: 1,
+          color: "#6b0000", // Deep dried blood red
+          textShadow: "0px 0px 0px rgba(0,0,0,0)",
+          filter: "blur(0px)",
+          duration: 0.8,
+          ease: "elastic.out(1.2, 0.4)",
+          scrollTrigger: {
+            trigger: word,
+            start: "top 75%", // Triggers right when the reader hits it
+            toggleActions: "play none none reverse", // Non-scrubbed, plays instantly
+          }
         }
       );
     });
 
-    gsap.to(".bg-watermark", {
-      y: -120,
-      ease: "none",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
-  }, { scope: sectionRef });
+  }, { scope: containerRef });
 
   return (
-    <section
-      ref={sectionRef}
-      id="story"
-      className="relative w-full bg-[#E5E1D8] text-[#1C1C1C] rounded-t-[2.5rem] md:rounded-t-[4rem] -mt-12 z-30 overflow-hidden shadow-[0_-20px_60px_rgba(0,0,0,0.6)]"
-      style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E")`,
-      }}
+    <section 
+      id="story" 
+      ref={containerRef} 
+      className="about-section relative w-full bg-[#b8ad97] text-[#1a1a1a] overflow-hidden z-20 shadow-[0_0_80px_rgba(0,0,0,0.9)] py-32 md:py-48 flex justify-center"
     >
-      {/* Centered watermark — no overflow, no cut-off */}
-      <div className="bg-watermark pointer-events-none select-none absolute inset-0 flex flex-col items-center justify-center opacity-[0.035] font-bebas leading-none text-[#1C1C1C] text-center pt-24">
-        <span className="text-[23vw] md:text-[18vw]">THE STORY</span>
-        <span className="text-[23vw] md:text-[18vw]">SO FAR</span>
+
+      <div className="about-content relative w-full flex justify-center">
+
+      {/* High Quality Textured Paper Background */}
+      <div 
+        className="pointer-events-none absolute inset-0 z-0 bg-cover bg-center mix-blend-multiply opacity-[0.55]"
+        style={{
+          backgroundImage: 'url("https://images.unsplash.com/photo-1586075010923-2dd4570fb338?q=80&w=2000&auto=format&fit=crop")'
+        }}
+      />
+
+      {/* Extreme Burned / Dirty Edges Vignette */}
+      <div className="pointer-events-none absolute inset-0 z-0 shadow-[inset_0_0_300px_rgba(40,20,0,0.9),inset_0_0_80px_rgba(20,10,0,0.8)] mix-blend-multiply" />
+      
+      {/* Fractal noise for rough paper physical texture */}
+      <div 
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.4] mix-blend-color-burn"
+        style={{
+          backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\' opacity=\'1\'/%3E%3C/svg%3E")'
+        }}
+      />
+
+      {/* Mouse-Reactive Cinematic Spotlight */}
+      <div 
+        className="pointer-events-none absolute inset-0 z-[5] opacity-60 mix-blend-color-dodge transition-opacity duration-300"
+        style={{
+          backgroundImage: `radial-gradient(circle 300px at var(--mouse-x, 50vw) var(--mouse-y, 50vh), rgba(255, 248, 210, 0.55) 0%, transparent 75%)`,
+          backgroundAttachment: "fixed"
+        }}
+      />
+      
+      {/* Edge burn for spotlight contrast */}
+      <div 
+        className="pointer-events-none absolute inset-0 z-[4] opacity-50 mix-blend-color-burn transition-opacity duration-300"
+        style={{
+          backgroundImage: `radial-gradient(circle 500px at var(--mouse-x, 50vw) var(--mouse-y, 50vh), transparent 40%, rgba(40, 20, 0, 0.8) 100%)`,
+          backgroundAttachment: "fixed"
+        }}
+      />
+
+      {/* Red Pen edits over the text act as the dynamic layer */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12 flex flex-col justify-center min-h-screen bg-transparent">
+        
+        {/* Top Header Information traditionally found on scripts */}
+        <div className="flex justify-between items-end border-b-[6px] border-[#111]/80 pb-4 mb-24 opacity-80 font-courier text-base md:text-lg font-bold">
+          <span style={{ textShadow: "0 0 1px rgba(0,0,0,0.5)"}}>PROJECT: THE OVERHAUL</span>
+          <span className="text-right" style={{ textShadow: "0 0 1px rgba(0,0,0,0.5)"}}>DRAFT: FINAL V2<br/>PAGE: 1</span>
+        </div>
+
+        {/* The Script Flow */}
+        <div className="relative mt-12 w-full flex flex-col items-center">
+          
+          <ScriptLine type="scene" text={
+            <>
+              INT. THE DEVELOPMENT STUDIO - LATE NIGHT
+              <DirectorNote viewBox="0 0 400 50" className="w-[60%] h-[150%] left-[40%] -top-[20%]">
+                {/* Aggressively scratch out "LATE NIGHT" */}
+                <path d="M 10,25 Q 150,40 380,10 M 20,15 Q 200,5 370,35 M 30,35 Q 150,-5 360,30" />
+              </DirectorNote>
+            </>
+          } />
+
+          {/* Action Header */}
+          <ScriptLine type="action" text={
+            <>
+              The glow of a massive monitor cuts through the absolute pitch black of the room. Lines of <ExplosiveWord>flawless</ExplosiveWord> TypeScript scroll rapidly. A self-taught architect is shifting from basic automation scripts to forging highly complex, emotionally resonant web applications.
+              <DirectorNote viewBox="0 0 500 150" className="w-[105%] h-[150%] -left-[2%] -top-[10%]">
+                 {/* Double frantic underline */}
+                 <path d="M 20,130 Q 250,145 480,120 M 15,140 Q 250,155 485,130" />
+                 {/* Aggressive arrow pointing to "TypeScript" */}
+                 <path d="M 400,20 Q 380,50 350,80 M 350,80 L 370,75 M 350,80 L 360,60" />
+              </DirectorNote>
+            </>
+          } className="w-full text-justify" />
+
+          <div className="my-16 flex flex-col items-center w-full">
+            <ScriptLine type="character" text="RAUNAK" />
+            <ScriptLine type="parenthetical" text={
+              <>
+                (leaning dangerously close to the screen)
+                <DirectorNote viewBox="0 0 300 50" className="w-[120%] h-[150%] -left-[10%] -top-[25%] opacity-80">
+                   {/* Frantic cross-out stroke */}
+                   <path d="M 10,35 Q 150,10 290,25 M 20,20 Q 150,40 280,15" strokeWidth="4" />
+                </DirectorNote>
+              </>
+            } />
+            
+            <div className="w-full flex justify-center px-4 md:px-0">
+               <ScriptLine type="dialogue" text="It's not just about writing clean code. If an interface doesn't feel like a movie... if the scroll doesn't have a relentless pulse... it isn't finished." className="w-full text-center" />
+            </div>
+          </div>
+
+          <ScriptLine type="action" text={
+            <>
+              He <ExplosiveWord>brutally</ExplosiveWord> forces the build. TypeScript, React, Next.js, and Tailwind CSS lay the robust foundation. GSAP injects buttery smooth, cinematic motion. The performance metrics <ExplosiveWord>shatter</ExplosiveWord> the ceiling and hit a <ExplosiveWord>flawless</ExplosiveWord> 100. A smirk.
+              <DirectorNote viewBox="0 0 800 200" className="w-[110%] h-[130%] -left-[5%] -top-[15%] opacity-70">
+                 {/* Giant angry X across the whole paragraph */}
+                 <path d="M 50,20 L 750,180" strokeWidth="5" />
+                 <path d="M 750,20 L 50,180" strokeWidth="5" />
+                 {/* Circle around "smirk" */}
+                 <path d="M 680,180 C 650,140 750,120 780,150 C 800,180 730,220 680,180" strokeWidth="3" />
+              </DirectorNote>
+            </>
+          } className="w-full text-justify mt-8" />
+
+          <div className="my-16 flex flex-col items-center w-full">
+            <ScriptLine type="character" text="RAUNAK (THOUGHT)" />
+            
+            <div className="w-full flex justify-center px-4 md:px-0">
+               <ScriptLine type="thought" text={
+                 <>
+                   Tools are just tools. The real stack is rhythm, framing, and <ExplosiveWord>ruthlessly</ExplosiveWord> obsessing over the micro-interactions. My goal is to build things that people don't just 'use', but <ExplosiveWord>truly</ExplosiveWord> experience.
+                   <DirectorNote viewBox="0 0 600 250" className="w-[120%] h-[140%] -left-[10%] -top-[20%]">
+                      {/* Left margin angry zigzag */}
+                      <path d="M 20,20 L 10,60 L 30,100 L 5,140 L 25,180 L 10,220" strokeWidth="4" />
+                      {/* Aggressive underline under "truly experience" */}
+                      <path d="M 400,230 Q 500,240 580,220" strokeWidth="5" />
+                   </DirectorNote>
+                 </>
+               } className="w-full text-center" />
+            </div>
+          </div>
+
+          <ScriptLine type="transition" text={
+            <>
+              SMASH CUT TO:
+              <DirectorNote viewBox="0 0 200 100" className="w-[150%] h-[200%] -left-[25%] -top-[50%]">
+                 {/* Aggressive Box around transition */}
+                 <path d="M 10,10 L 190,15 L 185,90 L 15,85 Z" strokeWidth="4" />
+                 {/* Exclamation marks */}
+                 <path d="M 210,20 L 205,70 M 205,85 L 204,90 M 230,25 L 225,75 M 225,90 L 224,95" strokeWidth="5" />
+              </DirectorNote>
+            </>
+          } />
+
+          <ScriptLine type="scene" text="EXT. THE INDUSTRY - DAWN" />
+
+          <div className="my-16 flex flex-col items-center w-full">
+            <ScriptLine type="character" text="NARRATOR (V.O.)" />
+            <div className="w-full flex justify-center px-4 md:px-0">
+               <ScriptLine type="narrator" text={
+                 <>
+                   A wasteland of repetitive templates and generic UI components stretches infinitely. A new standard is demanded. Iterative, visually-aggressive development creating premium digital environments. Approaching interface design the exact same way an insane director approaches a scene. Every pixel blocked, lit, and paced for maximum narrative <ExplosiveWord>trauma</ExplosiveWord>.
+                   <DirectorNote viewBox="0 0 500 200" className="w-[105%] h-[120%] -left-[2%] -top-[10%]">
+                      {/* Massive circle around "narrative trauma" at the end */}
+                      <path d="M 350,160 C 350,120 480,120 480,160 C 480,200 340,200 350,160 Z" strokeWidth="3" />
+                      <path d="M 330,170 Q 250,190 100,180" strokeDasharray="10, 10" />
+                   </DirectorNote>
+                 </>
+               } className="w-full text-center" />
+            </div>
+          </div>
+
+        </div>
+
       </div>
-
-      {/* ────── SCREENPLAY PAGE ────── */}
-      <div className="relative z-10 max-w-2xl mx-auto px-8 sm:px-12 py-28 md:py-48 flex flex-col gap-14 font-mono">
-
-        {/* TITLE CARD */}
-        <div className="script-el text-center space-y-3 pb-12 border-b border-[#1C1C1C]/20">
-          <h2 className="font-bebas text-5xl md:text-7xl lg:text-8xl tracking-[0.12em] text-[#1C1C1C]">
-            THE STORY SO FAR
-          </h2>
-          <p className="text-xs md:text-sm tracking-[0.35em] uppercase text-[#1C1C1C]/50">
-            Written & Directed by Raunak
-          </p>
-        </div>
-
-        {/* SCENE HEADING */}
-        <div className="script-el text-sm md:text-base font-bold uppercase tracking-[0.22em] text-[#1C1C1C]">
-          INT. THE DESK — CONTINUOUS
-        </div>
-
-        {/* ACTION LINES */}
-        <div className="space-y-5 text-sm md:text-[0.95rem] leading-[1.9] text-[#1C1C1C]/85">
-          <ScrubText>
-            RAUNAK sits illuminated only by the harsh glow of dual monitors. Code streams down one screen, a Tarkovsky still rests on the other.
-          </ScrubText>
-          <ScrubText>
-            He is a developer by day, but every waking hour is obsessed with film.
-          </ScrubText>
-        </div>
-
-        {/* CHARACTER + DIALOGUE */}
-        <div className="script-el flex flex-col items-center mt-6 gap-2">
-          <span className="font-bold uppercase tracking-[0.3em] text-sm md:text-base text-[#1C1C1C]">
-            RAUNAK
-          </span>
-          <span className="italic text-xs md:text-sm text-[#1C1C1C]/60 tracking-widest">
-            (voice over)
-          </span>
-          <div className="mt-4 w-[85%] md:w-[75%] space-y-4 text-sm md:text-[0.95rem] leading-[1.9] text-[#1C1C1C]/85">
-            <ScrubText>
-              The best interfaces, like the best films, are built on story, tension, and release.
-            </ScrubText>
-            <ScrubText>
-              Every pixel is a frame. Every interaction, a cut.
-            </ScrubText>
-          </div>
-        </div>
-
-        {/* ACTION LINES */}
-        <div className="space-y-5 text-sm md:text-[0.95rem] leading-[1.9] text-[#1C1C1C]/85 mt-6">
-          <ScrubText>
-            He crafts digital experiences that feel like cinema — immersive, intentional, and hard to forget.
-          </ScrubText>
-          <ScrubText>
-            Whether building a blazing-fast web app or directing a slow-burn animation, he brings a director's eye to the build.
-          </ScrubText>
-        </div>
-
-        {/* GOLD DIVIDER QUOTE */}
-        <div className="script-el mt-10 border-l-4 border-[#B28A32] pl-6 space-y-2">
-          <p className="font-bebas text-2xl md:text-3xl tracking-wide text-[#1C1C1C]/80 italic">
-            "Cinema is a matter of what's in the frame and what's out."
-          </p>
-          <p className="text-xs tracking-[0.3em] uppercase text-[#1C1C1C]/50">
-            — Martin Scorsese
-          </p>
-        </div>
-
-        {/* TRANSITION */}
-        <div className="script-el text-right font-bold uppercase tracking-[0.3em] text-sm md:text-base mt-10 text-[#1C1C1C]/70">
-          CUT TO:
-        </div>
-
-        {/* NEW SCENE */}
-        <div className="script-el text-sm md:text-base font-bold uppercase tracking-[0.22em] text-[#1C1C1C] mt-4">
-          INT. THE THEATER — LATER
-        </div>
-
-        <div className="text-sm md:text-[0.95rem] leading-[1.9] text-[#1C1C1C]/85">
-          <ScrubText>
-            A curated list of his defining inspirations flickers on the screen:
-          </ScrubText>
-        </div>
-
-        {/* ESSENTIAL VIEWING */}
-        <div className="script-el mt-4">
-          <div className="text-center font-bold uppercase tracking-[0.35em] text-sm md:text-base border-b border-[#1C1C1C]/20 pb-5 mb-8">
-            ESSENTIAL VIEWING
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8">
-            {favFilms.map((film) => (
-              <div key={film.title} className="group cursor-pointer flex flex-col">
-                <span className="font-bebas text-[1.5rem] md:text-[1.75rem] tracking-wide group-hover:text-[#B28A32] transition-colors duration-300">
-                  "{film.title}"
-                </span>
-                <span className="text-[0.6rem] md:text-xs tracking-[0.25em] uppercase text-[#1C1C1C]/55 mt-1 group-hover:text-[#1C1C1C]/90 transition-colors">
-                  DIR. {film.dir}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* FADE OUT */}
-        <div className="script-el text-center uppercase tracking-[0.4em] text-xs text-[#1C1C1C]/35 mt-24">
-          [ END OF ACT ONE ]
-        </div>
 
       </div>
     </section>

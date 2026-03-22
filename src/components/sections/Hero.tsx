@@ -20,6 +20,7 @@ function FilmCountdown({ onDone }: { onDone: () => void }) {
       const t = setTimeout(onDone, 400);
       return () => clearTimeout(t);
     }
+    
     const t = setTimeout(() => setCount((c) => c - 1), 700);
     return () => clearTimeout(t);
   }, [count, onDone]);
@@ -160,7 +161,7 @@ export default function Hero() {
       </AnimatePresence>
 
       <section ref={heroRef} className="relative min-h-screen flex flex-col items-center justify-center px-6 md:px-16 lg:px-24 overflow-hidden bg-cinema-black">
-
+        
         {/* Dynamic Cinematic Lighting (Lens Flares / Orbs) */}
         <motion.div
           animate={{

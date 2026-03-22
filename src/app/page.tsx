@@ -1,29 +1,40 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
-import Skills from "@/components/sections/Skills";
-import Projects from "@/components/sections/Projects";
-import Quotes from "@/components/sections/Quotes";
-import Contact from "@/components/sections/Contact";
-import Footer from "@/components/Footer";
+
+import EndCredits from "@/components/sections/EndCredits";
 import CustomCursor from "@/components/CustomCursor";
-import CinematicDivider from "@/components/CinematicDivider";
+import SceneTransition from "@/components/SceneTransition";
+import CrewSpotlight from "@/components/sections/CrewSpotlight";
+import Filmography from "@/components/sections/Filmography";
+import ProductionLog from "@/components/sections/ProductionLog";
+import BonusFeature from "@/components/sections/BonusFeature";
 
 export default function Home() {
   return (
     <div className="grain">
       <CustomCursor />
       <Navbar />
-      <main className="flex flex-col gap-8 md:gap-10 lg:gap-12 pb-8 md:pb-10 lg:pb-12">
+      <main className="relative flex flex-col">
         <Hero />
+        
+        <SceneTransition scene="ACT I — THE PROTAGONIST" />
         <About />
-        <Skills />
-        <Projects />
-        <CinematicDivider scene="INTERMISSION — TAKE A BREATH" bg="bg-transparent" />
-        <Quotes />
-        <Contact />
+
+        <SceneTransition scene="ACT II — THE CAST & CREW" />
+        <CrewSpotlight />
+
+        <SceneTransition scene="ACT III — THE PRODUCTION LOG" />
+        <ProductionLog />
+
+        <SceneTransition scene="ACT IV — THE FILMOGRAPHY" />
+        <Filmography />
+
+        <BonusFeature />
+
+        <SceneTransition scene="ACT V — THE END CREDITS" />
+        <EndCredits />
       </main>
-      <Footer />
     </div>
   );
 }

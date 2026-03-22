@@ -1,6 +1,4 @@
-"use client";
-
-const navLinks = [
+"use client";const navLinks = [
   { label: "Story", href: "#story" },
   { label: "Crew", href: "#crew" },
   { label: "Filmography", href: "#filmography" },
