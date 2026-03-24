@@ -11,20 +11,20 @@ if (typeof window !== "undefined") {
 }
 
 const crew = [
-  { role: "Lead Actor", name: "React / Next.js", time: "06:00 AM" },
-  { role: "Director of Photography", name: "TypeScript", time: "07:30 AM" },
-  { role: "Sound Designer", name: "Node.js", time: "08:15 AM" },
+  { role: "Lead Actor", name: "React.js / Next.js", time: "06:00 AM" },
+  { role: "Director of Photography", name: "TypeScript / JS", time: "07:30 AM" },
+  { role: "Sound Designer", name: "C/C++", time: "08:15 AM" },
   { role: "Production Designer", name: "Tailwind CSS", time: "09:00 AM" },
-  { role: "Editor", name: "Git & GitHub", time: "10:30 AM" },
-  { role: "Visual Effects", name: "Framer Motion / GSAP", time: "11:45 AM" },
-  { role: "Score Composer", name: "MongoDB / PostgreSQL", time: "01:00 PM" },
-  { role: "Casting Director", name: "REST APIs / GraphQL", time: "02:30 PM" },
+  { role: "Editor", name: "Python", time: "10:30 AM" },
+  { role: "Visual Effects", name: "Cursor / Copilot", time: "11:45 AM" },
+  { role: "Score Composer", name: "Gemini / Claude", time: "01:00 PM" },
+  { role: "Casting Director", name: "PostgreSQL", time: "02:30 PM" },
 ];
 
 const marqueeItems = [
-  "React", "Next.js", "TypeScript", "Node.js", "Tailwind CSS",
-  "Framer Motion", "GSAP", "MongoDB", "PostgreSQL", "Git",
-  "REST API", "GraphQL", "Figma", "Vercel", "Docker",
+  "C/C++", "Python", "JavaScript", "TypeScript", "React.js",
+  "Next.js", "Tailwind CSS", "PostgreSQL", "Cursor",
+  "GitHub Copilot", "Gemini 2.0 Flash", "Claude", "Augment",
 ];
 
 function MarqueeRow({ reverse = false, className }: { reverse?: boolean; className?: string }) {

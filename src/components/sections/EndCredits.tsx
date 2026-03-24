@@ -18,9 +18,9 @@ const montageImages = [
 
 const menuLinks = [
   { name: "THE PRESS KIT (Resume)", href: "/resume.pdf" },
-  { name: "GITHUB", href: "https://github.com/Raunak" },
+  { name: "GITHUB", href: "https://github.com/raunak6531" },
   { name: "LINKEDIN", href: "https://linkedin.com/in/Raunak" },
-  { name: "BOOKING & INQUIRIES", href: "mailto:hello@example.com" },
+  { name: "EMAIL", href: "mailto:raunak6531@gmail.com" },
 ];
 
 export default function EndCredits() {

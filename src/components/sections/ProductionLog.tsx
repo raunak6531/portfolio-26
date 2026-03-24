@@ -11,28 +11,36 @@ if (typeof window !== "undefined") {
 
 const experiences = [
   {
-    id: "ai-assistant",
-    role: "AI Developer / Project Lead",
-    production: "AI-Based Training Assistant",
-    timeline: "Sept 2025",
-    description: "Orchestrated the development of an AI-driven training platform. Defined target audience metrics and structured team roles for maximum narrative impact.",
-    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1965&auto=format&fit=crop"
+    id: "muj-btech",
+    role: "B.Tech CSE - AI/ML",
+    production: "Manipal University Jaipur",
+    timeline: "Aug 2023 - 2027",
+    description: "Maintaining a 9.49 CGPA and recognized on the Dean's List for four consecutive semesters.",
+    image: "https://images.unsplash.com/photo-1541873676-a18131494184?q=80&w=1918&auto=format&fit=crop"
   },
   {
-    id: "google-ai",
-    role: "Certified Specialist",
-    production: "Google AI Essentials",
-    timeline: "Aug 2025",
-    description: "Completed comprehensive certification, applying prompt engineering and AI workflows to real-world development scenarios.",
+    id: "techlearn-intern",
+    role: "Frontend Developer Intern",
+    production: "TechLearn Solutions",
+    timeline: "June 2025 - Aug 2025",
+    description: "Built the Homepage and Learn page, incorporating smooth animations to make the UI interactive.",
     image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop"
   },
   {
-    id: "muj-cse",
-    role: "B.Tech CSE - AIML",
-    production: "Manipal University Jaipur",
-    timeline: "2023 - Present",
-    description: "Directing my academic focus in AI and Machine Learning at Manipal University Jaipur. Mastering foundational scripts.",
-    image: "https://images.unsplash.com/photo-1541873676-a18131494184?q=80&w=1918&auto=format&fit=crop"
+    id: "techlearn-jr",
+    role: "Junior Frontend Developer",
+    production: "TechLearn Solutions",
+    timeline: "Aug 2025 - Oct 2025",
+    description: "Developing modern and responsive user-friendly web pages using React and Tailwind CSS.",
+    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1965&auto=format&fit=crop"
+  },
+  {
+    id: "hpe-cpp3",
+    role: "Project Developer",
+    production: "HPE - CPP3 Program",
+    timeline: "2026 - Present",
+    description: "Currently developing an enterprise project as part of the prestigious Hewlett Packard Enterprise CPP3 Program.",
+    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop"
   }
 ];
 

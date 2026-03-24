@@ -11,22 +11,22 @@ if (typeof window !== "undefined") {
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const crew = [
-  { role: "Lead Actor", name: "React / Next.js", type: "Framework", stat: "99+ projects", accent: "#e8c96a",
-    details: "Core UI framework. Handles state, routing, and component lifecycle with precision. The glue that holds every frame of the digital film together." },
-  { role: "Dir. of Photography", name: "TypeScript", type: "Language", stat: "Strict mode", accent: "#7cacf8",
-    details: "Static typing for JavaScript. Gives clarity across every angle — no blurry shots, no ambiguous types. Every variable framed with intent." },
-  { role: "Sound Designer", name: "Node.js", type: "Runtime", stat: "Event-driven", accent: "#7ec94b",
-    details: "Non-blocking, event-driven runtime built on Chrome's V8. The rhythm section of the backend — always in time, never blocking the beat." },
+  { role: "Lead Actor", name: "React.js / Next.js", type: "Framework", stat: "99+ projects", accent: "#e8c96a",
+    details: "Core UI framework mapped for interactive scenes. Handles state, routing, and component lifecycle with precision." },
+  { role: "Dir. of Photography", name: "JS / TypeScript", type: "Language", stat: "Strict mode", accent: "#7cacf8",
+    details: "Static typing for JavaScript. Gives clarity across every angle — no blurry shots, no ambiguous types." },
+  { role: "Casting Director", name: "PostgreSQL", type: "Database", stat: "ACID compliant", accent: "#5298c3",
+    details: "Relational database for storing production data securely. The underlying score that gives the narrative its persistent memory." },
   { role: "Production Designer", name: "Tailwind CSS", type: "Styling", stat: "Utility-first", accent: "#38bdf8",
     details: "Utility-first CSS framework for rapid UI construction. Sets the stage — every utility class a carefully placed piece of production design." },
-  { role: "Editor", name: "Git & GitHub", type: "Tooling", stat: "3000+ commits", accent: "#f07451",
-    details: "Version control and collaborative coding. The editing suite — non-linear, precise, preserving every cut in the history of this production." },
-  { role: "Visual Effects", name: "GSAP / Framer", type: "Animation", stat: "60fps always", accent: "#88ce02",
-    details: "Animation libraries for complex interactions and buttery-smooth transitions. The VFX team — turning static components into living, breathing scenes." },
-  { role: "Score Composer", name: "PostgreSQL", type: "Database", stat: "ACID compliant", accent: "#5298c3",
-    details: "Relational database for storing production data securely. The underlying score that gives the narrative its persistent memory." },
-  { role: "Casting Director", name: "REST / GraphQL", type: "API", stat: "Type-safe", accent: "#e535ab",
-    details: "Clean API interfaces for querying and manipulating data streams. Curates the right data for each scene — never more, never less." },
+  { role: "Sound Designer", name: "C / C++", type: "Language", stat: "Performance", accent: "#7ec94b",
+    details: "Low-level languages for high-performance computing. Providing the intense, raw audio track that powers core logic." },
+  { role: "Editor", name: "Python", type: "Language", stat: "AI / Data", accent: "#f07451",
+    details: "Versatile programming language. The editing suite — precise, legible, and the backbone of machine learning operations." },
+  { role: "Visual Effects", name: "Cursor / Copilot", type: "AI Tooling", stat: "Generative", accent: "#88ce02",
+    details: "AI-assisted development environments. The VFX team — accelerating workflow and generating boilerplate with high-speed intelligence." },
+  { role: "Score Composer", name: "Gemini / Claude", type: "AI Models", stat: "Reasoning", accent: "#e535ab",
+    details: "Advanced LLMs for complex problem solving and code generation. Curates the right logic for each scene." },
 ];
 
 const TOTAL = crew.length;

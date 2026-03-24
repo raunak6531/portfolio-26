@@ -6,11 +6,23 @@ import { X, ExternalLink, Github } from "lucide-react";
 
 const filmography = [
   {
+    id: "phisaver",
+    title: "PhiSaver",
+    logline: "A gamified savings application designed to encourage millennials and Gen Z to build wealth over time using behavioral economics.",
+    director: "Raunak Sadana",
+    cast: ["Next.js", "Tailwind CSS", "Clerk", "Flask", "PostgreSQL", "Gemini 2.0 Flash"],
+    posterUrl: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=2071&auto=format&fit=crop",
+    trailerUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+    releaseDate: "2026",
+    liveLink: "#",
+    repoLink: "#"
+  },
+  {
     id: "storyboxd",
     title: "StoryBoxd",
-    logline: "A digital space for logging and reviewing the narratives that shape us.",
-    director: "Raunak",
-    cast: ["React", "Next.js", "Tailwind"],
+    logline: "A Next.js PWA that scrapes Letterboxd reviews and generates customizable, aesthetic images for Instagram Stories.",
+    director: "Raunak Sadana",
+    cast: ["Next.js", "TypeScript", "Tailwind CSS", "html2canvas"],
     posterUrl: "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2059&auto=format&fit=crop", 
     trailerUrl: "https://www.w3schools.com/html/mov_bbb.mp4", 
     releaseDate: "2026",
@@ -18,60 +30,24 @@ const filmography = [
     repoLink: "#"
   },
   {
-    id: "lila",
-    title: "LILA",
-    logline: "Life, gamified. An immersive tracking experience set in a rich Indian context.",
-    director: "Raunak",
-    cast: ["React Native", "Node.js", "MongoDB"],
-    posterUrl: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1925&auto=format&fit=crop", 
+    id: "letsmate",
+    title: "Let's Mate",
+    logline: "A fun, free-to-play chess game to play against the Stockfish engine in your preferred difficulty.",
+    director: "Raunak Sadana",
+    cast: ["React", "Socket.IO", "Stockfish Engine"],
+    posterUrl: "https://images.unsplash.com/photo-1586165368502-1bad197a6461?q=80&w=2158&auto=format&fit=crop", 
     trailerUrl: "https://www.w3schools.com/html/mov_bbb.mp4", 
     releaseDate: "2026",
     liveLink: "#",
     repoLink: "#"
   },
   {
-    id: "nerd-match",
-    title: "The Guild",
-    logline: "An RPG-style matchmaking experience. Swipe right on your player two.",
-    director: "Raunak",
-    cast: ["Next.js", "PostgreSQL", "GSAP"],
-    posterUrl: "https://images.unsplash.com/photo-1604004555489-723a93d6ce74?q=80&w=1974&auto=format&fit=crop", 
-    trailerUrl: "https://www.w3schools.com/html/mov_bbb.mp4", 
-    releaseDate: "2026",
-    liveLink: "#",
-    repoLink: "#"
-  },
-  {
-    id: "echo-chamber",
-    title: "Echo Chamber",
-    logline: "A real-time collaborative platform built for seamless creative iteration.",
-    director: "Raunak",
-    cast: ["Next.js", "WebSockets", "Prisma"],
-    posterUrl: "https://images.unsplash.com/photo-1518131672697-611eb14fdceb?q=80&w=2070&auto=format&fit=crop", 
-    trailerUrl: "https://www.w3schools.com/html/mov_bbb.mp4", 
-    releaseDate: "2025",
-    liveLink: "#",
-    repoLink: "#"
-  },
-  {
-    id: "noir-market",
-    title: "Noir Market",
-    logline: "A dark-themed luxury e-commerce experience with seamless performance.",
-    director: "Raunak",
-    cast: ["React", "Node.js", "Stripe"],
-    posterUrl: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=2069&auto=format&fit=crop", 
-    trailerUrl: "https://www.w3schools.com/html/mov_bbb.mp4", 
-    releaseDate: "2025",
-    liveLink: "#",
-    repoLink: "#"
-  },
-  {
-    id: "frame-rate",
-    title: "Frame Rate",
-    logline: "A high-performance agency portfolio with zero-lag transitions.",
-    director: "Raunak",
-    cast: ["Next.js", "GSAP", "Sanity"],
-    posterUrl: "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=2070&auto=format&fit=crop", 
+    id: "portfolio-v1",
+    title: "Portfolio v1",
+    logline: "The original iteration of my digital archive, built as the foundation of my engineering journey.",
+    director: "Raunak Sadana",
+    cast: ["React", "HTML/CSS", "JavaScript", "GSAP"],
+    posterUrl: "https://images.unsplash.com/photo-1507238692062-5a02ea0124ad?q=80&w=2070&auto=format&fit=crop", 
     trailerUrl: "https://www.w3schools.com/html/mov_bbb.mp4", 
     releaseDate: "2024",
     liveLink: "#",
@@ -316,9 +292,9 @@ export default function Filmography() {
       {/* The Film Strip (Default View) */}
       <div 
         ref={scrollRef}
-        className="relative z-10 flex flex-1 items-center justify-start w-full overflow-x-auto overflow-y-hidden hide-scrollbar py-20 px-8 md:px-16 lg:px-24"
+        className="relative z-10 flex flex-1 items-center justify-start w-full overflow-x-auto overflow-y-hidden hide-scrollbar py-20"
       >
-        <div className="flex items-center gap-12 md:gap-20 min-w-max pr-[20vw]">
+        <div className="flex items-center gap-12 md:gap-20 min-w-max px-8 md:px-16 lg:px-24 pb-8 pr-[10vw]">
           {filmography.map((film, index) => (
             <FilmPoster 
               key={film.id}
