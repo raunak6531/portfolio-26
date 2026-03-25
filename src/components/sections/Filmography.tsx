@@ -12,10 +12,10 @@ const filmography = [
     director: "Raunak Sadana",
     cast: ["Next.js", "Tailwind CSS", "Clerk", "Flask", "PostgreSQL", "Gemini 2.0 Flash"],
     posterUrl: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=2071&auto=format&fit=crop",
-    trailerUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+    trailerUrl: "/videos/phisaver.mp4",
     releaseDate: "2026",
-    liveLink: "#",
-    repoLink: "#"
+    liveLink: "https://phi-saver-savingapp.vercel.app/",
+    repoLink: "https://github.com/raunak6531/my-savings-app"
   },
   {
     id: "storyboxd",
@@ -24,10 +24,10 @@ const filmography = [
     director: "Raunak Sadana",
     cast: ["Next.js", "TypeScript", "Tailwind CSS", "html2canvas"],
     posterUrl: "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2059&auto=format&fit=crop", 
-    trailerUrl: "https://www.w3schools.com/html/mov_bbb.mp4", 
+    trailerUrl: "/videos/storyboxd.mp4", 
     releaseDate: "2026",
-    liveLink: "#",
-    repoLink: "#"
+    liveLink: "https://storyboxd-eight.vercel.app/",
+    repoLink: "https://github.com/raunak6531/storyboxd"
   },
   {
     id: "letsmate",
@@ -36,10 +36,10 @@ const filmography = [
     director: "Raunak Sadana",
     cast: ["React", "Socket.IO", "Stockfish Engine"],
     posterUrl: "https://images.unsplash.com/photo-1586165368502-1bad197a6461?q=80&w=2158&auto=format&fit=crop", 
-    trailerUrl: "https://www.w3schools.com/html/mov_bbb.mp4", 
+    trailerUrl: "/videos/letsmate.mp4", 
     releaseDate: "2026",
-    liveLink: "#",
-    repoLink: "#"
+    liveLink: "https://chess-game-app-lemon.vercel.app/",
+    repoLink: "https://github.com/raunak6531/chess-game-app"
   },
   {
     id: "portfolio-v1",
@@ -48,10 +48,10 @@ const filmography = [
     director: "Raunak Sadana",
     cast: ["React", "HTML/CSS", "JavaScript", "GSAP"],
     posterUrl: "https://images.unsplash.com/photo-1507238692062-5a02ea0124ad?q=80&w=2070&auto=format&fit=crop", 
-    trailerUrl: "https://www.w3schools.com/html/mov_bbb.mp4", 
+    trailerUrl: "/videos/portfoliov1.mp4", 
     releaseDate: "2024",
-    liveLink: "#",
-    repoLink: "#"
+    liveLink: "https://my-portfolio-zeta-ten-49.vercel.app/",
+    repoLink: "https://github.com/raunak6531/personal-portfolio"
   }
 ];
 
