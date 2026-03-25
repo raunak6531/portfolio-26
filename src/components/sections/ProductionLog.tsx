@@ -16,7 +16,7 @@ const experiences = [
     production: "Manipal University Jaipur",
     timeline: "Aug 2023 - 2027",
     description: "Maintaining a 9.49 CGPA and recognized on the Dean's List for four consecutive semesters.",
-    image: "https://images.unsplash.com/photo-1541873676-a18131494184?q=80&w=1918&auto=format&fit=crop"
+    image: "/images/manipal.jpg"
   },
   {
     id: "techlearn-intern",
@@ -24,7 +24,7 @@ const experiences = [
     production: "TechLearn Solutions",
     timeline: "June 2025 - Aug 2025",
     description: "Built the Homepage and Learn page, incorporating smooth animations to make the UI interactive.",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop"
+    image: "/images/intern.png"
   },
   {
     id: "techlearn-jr",
@@ -32,7 +32,7 @@ const experiences = [
     production: "TechLearn Solutions",
     timeline: "Aug 2025 - Oct 2025",
     description: "Developing modern and responsive user-friendly web pages using React and Tailwind CSS.",
-    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1965&auto=format&fit=crop"
+    image: "/images/dev.png"
   },
   {
     id: "hpe-cpp3",
@@ -40,7 +40,7 @@ const experiences = [
     production: "HPE - CPP3 Program",
     timeline: "2026 - Present",
     description: "Currently developing an enterprise project as part of the prestigious Hewlett Packard Enterprise CPP3 Program.",
-    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop"
+    image: "/images/hpe.jpg"
   }
 ];
 
