@@ -101,7 +101,7 @@ export default function BonusFeature() {
             THE CRITIC'S<br/>DIARY
           </h2>
           <a 
-            href="https://letterboxd.com/" 
+            href="https://letterboxd.com/raunak6531/" 
             target="_blank" 
             rel="noopener noreferrer"
             className="group relative flex items-center justify-center gap-3 mt-8 pb-2 text-white text-xs md:text-sm font-sans font-medium uppercase tracking-[0.3em] transition-colors duration-500 hover:text-red-500 outline-none"

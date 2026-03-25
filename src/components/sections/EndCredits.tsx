@@ -19,7 +19,7 @@ const montageImages = [
 const menuLinks = [
   { name: "THE PRESS KIT (Resume)", href: "/resume.pdf" },
   { name: "GITHUB", href: "https://github.com/raunak6531" },
-  { name: "LINKEDIN", href: "https://linkedin.com/in/Raunak" },
+  { name: "LINKEDIN", href: "https://www.linkedin.com/in/raunak-sadana-640518204/" },
   { name: "EMAIL", href: "mailto:raunak6531@gmail.com" },
 ];
 
